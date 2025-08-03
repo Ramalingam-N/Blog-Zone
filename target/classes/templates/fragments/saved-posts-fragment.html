@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+	<div
+		class="post-div1"
+		th:each="post, iterStat: ${posts}"
+		th:fragment="savedPosts"
+	>
+		<div class="profile-post-div" th:attr="data-post-url=${post.url}">
+			<div class="post-img-div">
+				<img th:src="@{${post.image}}" height="120" width="200" />
+			</div>
+			<div class="post-info-div">
+				<h3 th:text="${post.title}" class="post-heading">
+					How to Use ChatGPT in Daily Life?
+				</h3>
+
+				<p th:text="${post.description}" class="post-description">
+					Save time and money using ChatGPT
+				</p>
+				<div class="post-actions-div">
+					<div class="like-div">
+						<img
+							th:class="'post-like' + ${iterStat.index} + ' like-action'"
+							th:attr="data-post-id=${post.id}"
+							th:src="@{${isLiked[iterStat.index]}}"
+							height="19"
+						/>
+
+						<span
+							th:class="'like-span-' + ${iterStat.index}"
+							th:text="${#lists.size(post.likes)}"
+							>136</span
+						>
+					</div>
+					<div class="comment-div">
+						<img
+							th:class="'comment-img-' + ${iterStat.index} + ' comment-action-img'"
+							th:src="@{/img/comment2.png}"
+							height="20"
+						/>
+						<span
+							th:class="'comment-span-' + ${iterStat.index} + ' comment-action-span'"
+							th:attr="data-post-url=${post.url}"
+							th:text="${#lists.size(post.comments)}"
+							>25</span
+						>
+					</div>
+					<div class="saved-div">
+						<img
+							th:class="'post-save' + ${iterStat.index} + ' save-action'"
+							th:attr="data-post-id=${post.id}"
+							th:src="@{${isSaved[iterStat.index]}}"
+							height="17"
+						/>
+						<span
+							th:class="'save-span-' + ${iterStat.index}"
+							th:text="${#lists.size(post.saves)}"
+							>11</span
+						>
+					</div>
+					<p th:text="${postDate[iterStat.index]}">Apr 4, 2023</p>
+				</div>
+			</div>
+		</div>
+		<hr class="below-post" />
+	</div>
+</html>

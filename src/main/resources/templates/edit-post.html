@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/write-post-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<div class="container">
+			<h2>Edit Blog Post</h2>
+			<form
+				th:action="@{/edit/{id}(id=${post.id})}"
+				method="POST"
+				th:object="${post}"
+				enctype="multipart/form-data"
+			>
+				<input type="hidden" name="url" th:field="*{url}" />
+				<input
+					type="text"
+					name="heading"
+					placeholder="Title"
+					th:field="*{title}"
+				/>
+				<textarea
+					name="description"
+					placeholder="Description"
+					th:field="*{description}"
+				></textarea>
+				<textarea
+					placeholder="Write..."
+					class="textarea-content"
+					name="content"
+					th:field="*{content}"
+				></textarea>
+
+				<div class="upload-image-div">
+					<label class="upload-image" for="image">Upload Image</label>
+					<input
+						type="file"
+						id="image"
+						name="image1"
+						accept="image/*"
+						required
+					/>
+					<p class="upload-status"></p>
+				</div>
+				<input type="submit" value="Update" />
+			</form>
+		</div>
+		<script
+			crossorigin="anonymous"
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			src="https://code.jquery.com/jquery-3.7.1.min.js"
+		></script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+		<script>
+			ClassicEditor.create(document.querySelector(".textarea-content"))
+				.then((editor) => {
+					console.log(editor);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+
+			const fileInput = document.getElementById("image");
+			const uploadStatus = document.querySelector(".upload-status");
+
+			// Add an event listener for the change event
+			fileInput.addEventListener("change", function () {
+				// Check if any files were selected
+				if (fileInput.files && fileInput.files.length > 0) {
+					// Get the selected file
+					const file = fileInput.files[0];
+
+					// Display feedback to the user
+					uploadStatus.textContent = `Image selected: ${file.name}`;
+					uploadStatus.style.color = "green"; // Set color to green for success
+				} else {
+					// No file was selected
+					uploadStatus.textContent = "No Image selected";
+					uploadStatus.style.color = "red"; // Set color to red for failure
+				}
+			});
+		</script>
+	</body>
+</html>

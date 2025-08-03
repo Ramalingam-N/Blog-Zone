@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/home-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<div>
+			<div class="all-post-div">
+				<div class="following-search-div">
+					<div class="following-div">
+						<span class="for-you">For you</span>
+						<span class="following">Following</span>
+					</div>
+					<form th:action="@{/searchPost}" method="POST" class="search-form">
+						<input
+							type="search"
+							class="searchInput"
+							placeholder="Search..."
+						/>
+						<button>
+							<img th:src="@{/img/search.png}" height="16" />
+						</button>
+					</form>
+				</div>
+				<hr class="below-following-search below-following-search1" />
+				<p class="no-post">No Post Available...</p>
+				<div class="add-posts">
+					<div class="Ok" th:replace=~{fragments/home-posts::homePosts}></div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var forYou = document.querySelector(".for-you");
+			var following = document.querySelector(".following");
+			var hr = document.querySelector(".below-following-search");
+			forYou.classList.add("add-black");
+
+			forYou.addEventListener("click", () => {
+				following.classList.remove("add-black");
+				forYou.classList.add("add-black");
+				hr.classList.remove("below-following-search2");
+				hr.classList.add("below-following-search1");
+			});
+
+			following.addEventListener("click", () => {
+				forYou.classList.remove("add-black");
+				following.classList.add("add-black");
+				hr.classList.remove("below-following-search1");
+				hr.classList.add("below-following-search2");
+			});
+
+			////////////////////////////  POST  //////////////////////////////////
+
+			function postViewAJAX(){
+				const div = document.querySelectorAll(".post-full-details");
+				div.forEach((div) => {
+					div.addEventListener("click", () => {
+						const url = div.getAttribute("data-post-url");
+						console.log(url);
+						window.location.href = `${window.location.origin}/post/${url}`;
+					});
+				});
+			}
+			postViewAJAX();
+
+			///////////////////////////  LIKED  //////////////////////////////////
+
+			function likedAJAX(){
+
+				const likeImg = document.querySelectorAll(".like-action");
+				likeImg.forEach((div, index) => {
+					div.addEventListener("click", () => {
+						console.log("Checking...");
+						event.stopPropagation();
+						const postId = div.getAttribute("data-post-id");
+						fetch(`/like-post/${postId}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ postId }),
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								document.querySelector(
+									`.like-span-${index}`
+								).textContent = data.likeCount;
+								document
+									.querySelector(`.post-like${index}`)
+									.setAttribute(
+										"src",
+										`/img/${data.likeImgSrc}.png`
+									);
+							})
+							.catch((error) =>
+								console.error("Error liking comment:", error)
+							);
+					});
+				});
+			}
+			likedAJAX();
+
+			///////////////////////////  SAVED  //////////////////////////////////
+
+			function savedAJAX(){
+				const saved = document.querySelectorAll(".save-action");
+				saved.forEach((div, index) => {
+					const postId = div.getAttribute("data-post-id");
+					div.addEventListener("click", () => {
+						event.stopPropagation();
+						fetch(`/save-post/${postId}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ postId }),
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								document.querySelector(
+									`.save-span-${index}`
+								).textContent = data.savedCount;
+								document
+									.querySelector(`.post-save${index}`)
+									.setAttribute(
+										"src",
+										`/img/${data.savedImgSrc}.png`
+									);
+							})
+							.catch((error) =>
+								console.error("Error saving post:", error)
+							);
+					});
+				});
+			}
+			savedAJAX();
+
+			/////////////////////////  FOLLOWING  /////////////////////////////////
+
+			function followAJAX(){
+				var followingSpan = document.querySelectorAll(".following-span");
+				followingSpan.forEach((div, index) => {
+					const userId = div.getAttribute("data-user-id");
+					div.addEventListener("click", () => {
+						event.stopPropagation();
+						fetch(`/follow-user/${userId}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ userId }),
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								followingSpan.forEach(div1 =>{
+									if(div1.getAttribute("data-user-id") == userId)
+										div1.textContent = data.follow;
+								})
+
+							})
+							.catch((error) =>
+								console.error("Error saving post:", error)
+							);
+					});
+				});
+			}
+			followAJAX();
+
+			///////////////////////   ForYou Posts   //////////////////////////////////
+
+			forYou.addEventListener("click", ()=>{
+				fetch("/forYou-posts", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ }),
+					})
+					.then((response) => response.text())
+					.then((data) => {
+						const forYouPostDiv = document.querySelector(".add-posts");
+						forYouPostDiv.innerHTML = data; 
+						followAJAX();
+						likedAJAX();
+						savedAJAX();
+						postViewAJAX();
+						const posts = forYouPostDiv.querySelectorAll(".post-div1"); // Assuming each post has a class "post"
+						if (posts.length == 0) {
+							document.querySelector(".no-post").style.display = "inline";
+						} else {
+							document.querySelector(".no-post").style.display = "none";
+						}
+
+						flag = "forYou";
+					})
+					.catch((error) =>
+						console.error("Error posting comment:", error)
+					);
+			});
+
+			///////////////////////   Following Posts   //////////////////////////////////
+
+			following.addEventListener("click", ()=>{
+				fetch("/following-posts", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ }),
+					})
+					.then((response) => response.text())
+					.then((data) => {
+						const followingPostDiv = document.querySelector(".add-posts");
+						
+						followingPostDiv.innerHTML = data;
+						followAJAX();
+						likedAJAX();
+						savedAJAX();
+						postViewAJAX();
+						const posts = followingPostDiv.querySelectorAll(".post-div1"); // Assuming each post has a class "post"
+						if (posts.length == 0) {
+							document.querySelector(".no-post").style.display = "block";
+						} else {
+							document.querySelector(".no-post").style.display = "none";
+						}
+						flag = "following";
+					})
+					.catch((error) =>
+						console.error("Error posting comment:", error)
+					);
+			});
+
+
+			////////////////////////////////   SearchForm   //////////////////////////////////////
+
+			const searchForm = document.querySelector(".search-form");
+			searchForm.addEventListener("submit", (event)=>{
+				event.preventDefault();
+
+				const form = event.target;
+				const formData = new FormData(form);
+				// Loop through formData entries
+				
+					if (flag == "forYou") {
+						formData.set("search", "1"+formData.get("search"));
+					}else{
+						formData.set("search", "2"+formData.get("search"));
+					}
+				
+
+				fetch(form.action, {
+						method: "POST",
+						body: formData,
+					})
+					.then((response) => response.text())
+					.then((data) => {
+						const postDiv = document.querySelector(".add-posts");
+						postDiv.innerHTML = data;
+
+						followAJAX();
+						likedAJAX();
+						savedAJAX();
+						postViewAJAX();
+						const posts = postDiv.querySelectorAll(".post-div1"); // Assuming each post has a class "post"
+						if (posts.length == 0) {
+							console.log("1");
+							document.querySelector(".no-post").style.display = "block";
+						} else {
+							console.log("1");
+							document.querySelector(".no-post").style.display = "none";
+						}
+					})
+					.catch((error) =>
+						console.error("Error posting comment:", error)
+					);
+			});
+
+			const searchInput = document.querySelector(".searchInput");
+			searchInput.setAttribute("name", "search");
+			var flag = "forYou";
+		</script>
+	</body>
+</html>

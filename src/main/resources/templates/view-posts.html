@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/home-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<div>
+			<div class="all-post-div">
+				<div class="following-search-div">
+					<div class="following-div">
+						<span class="saved-post">Posts</span>
+					</div>
+					<form class="search-form">
+						<input
+							type="search"
+							name="post"
+							placeholder="Search..."
+						/>
+						<button>
+							<img th:src="@{/img/search.png}" height="16" />
+						</button>
+					</form>
+				</div>
+
+				<hr
+					class="below-following-search below-following-search1 below-following-search3 below-following-search5"
+				/>
+
+				<p
+					class="no-posts"
+					th:if="${#lists.isEmpty(posts)}"
+					th:text="'No Posts Published...'"
+				></p>
+
+				<div
+					th:attr="data-post-url=${post.url}"
+					class="profile-post-div"
+					th:each="post, iterStat: ${posts}"
+				>
+					<div class="post-img-div">
+						<img
+							th:src="@{${post.image}}"
+							height="120"
+							width="200"
+						/>
+					</div>
+					<div class="post-info-div">
+						<h3 th:text="${post.title}" class="post-heading">
+							How to Use ChatGPT in Daily Life?
+						</h3>
+
+						<p
+							th:text="${post.description}"
+							class="post-description"
+						>
+							Save time and money using ChatGPT
+						</p>
+						<div class="post-actions-div">
+							<div class="like-div">
+								<img
+									th:class="'post-like' + ${iterStat.index} + ' like-action'"
+									th:attr="data-post-id=${post.id}"
+									th:src="@{${isLiked[iterStat.index]}}"
+									height="19"
+								/>
+
+								<span
+									th:class="'like-span-' + ${iterStat.index}"
+									th:text="${#lists.size(post.likes)}"
+									>136</span
+								>
+							</div>
+							<div class="comment-div">
+								<img
+									th:src="@{/img/comment2.png}"
+									height="20"
+								/>
+								<span th:text="${#lists.size(post.comments)}"
+									>25</span
+								>
+							</div>
+							<div class="saved-div">
+								<img
+									th:class="'post-save' + ${iterStat.index} + ' save-action'"
+									th:attr="data-post-id=${post.id}"
+									th:src="@{${isSaved[iterStat.index]}}"
+									height="17"
+								/>
+								<span
+									th:class="'save-span-' + ${iterStat.index}"
+									th:text="${#lists.size(post.saves)}"
+									>11</span
+								>
+							</div>
+							<p th:text="${postDate[iterStat.index]}">
+								Apr 4, 2023
+							</p>
+						</div>
+					</div>
+					<hr class="below-post" />
+				</div>
+			</div>
+		</div>
+		<script>
+			const div = document.querySelectorAll(".profile-post-div");
+			div.forEach((div) => {
+				div.addEventListener("click", () => {
+					const url = div.getAttribute("data-post-url");
+					window.location.href = `${window.location.origin}/post/${url}`;
+				});
+			});
+
+			//----------------------Post liked AJAX--------------------------//
+
+			const likeImg = document.querySelectorAll(".like-action");
+			likeImg.forEach((div, index) => {
+				div.addEventListener("click", () => {
+					event.stopPropagation();
+					const postId = div.getAttribute("data-post-id");
+					fetch(`/like-post/${postId}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ postId }),
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							document.querySelector(
+								`.like-span-${index}`
+							).textContent = data.likeCount;
+							document
+								.querySelector(`.post-like${index}`)
+								.setAttribute(
+									"src",
+									`/img/${data.likeImgSrc}.png`
+								);
+						})
+						.catch((error) =>
+							console.error("Error liking comment:", error)
+						);
+				});
+			});
+
+			//----------------------saved AJAX--------------------------//
+
+			const saved = document.querySelectorAll(".save-action");
+			saved.forEach((div, index) => {
+				console.log("check111");
+				const postId = div.getAttribute("data-post-id");
+				div.addEventListener("click", () => {
+					event.stopPropagation();
+					fetch(`/save-post/${postId}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ postId }),
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							document.querySelector(
+								`.save-span-${index}`
+							).textContent = data.savedCount;
+							document
+								.querySelector(`.post-save${index}`)
+								.setAttribute(
+									"src",
+									`/img/${data.savedImgSrc}.png`
+								);
+						})
+						.catch((error) =>
+							console.error("Error saving post:", error)
+						);
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,165 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div a {
+	text-decoration: none;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.profile-img {
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.profile-img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+.container {
+	width: 80rem;
+	margin: 3rem auto 3rem auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container h2 {
+	font-size: 2.8rem;
+	border-radius: 2.6rem;
+	text-align: center;
+	width: fit-content;
+	font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	/* width: fit-content; */
+	margin: 2rem auto 4rem auto;
+}
+input[type="text"] {
+	width: 80rem;
+	font-size: 2.6rem;
+	font-weight: 600;
+	color: rgb(71, 70, 70);
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	padding: 0 2rem;
+	height: 6rem;
+	border: none;
+	border-bottom: 1px solid rgb(197, 197, 197);
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover {
+	outline: none;
+	border-bottom: 1px solid rgb(137, 137, 137);
+}
+
+textarea {
+	min-height: 8rem;
+	font-size: 1.6rem;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	padding: 1rem 2rem;
+	border: 1px solid rgb(197, 197, 197);
+}
+
+textarea:focus,
+textarea:hover {
+	box-shadow: 0 0 1px 1px rgb(204, 203, 203);
+}
+
+textarea:focus {
+	outline: none;
+}
+
+.ck-editor__editable {
+	min-height: 14rem;
+	font-size: 1.8rem;
+	width: 80rem;
+}
+
+.ck-editor__editable:hover {
+	box-shadow: 0 0 1px 1px rgb(204, 203, 203);
+}
+
+.upload-image {
+	border: 1px solid rgb(170, 170, 170);
+	width: fit-content;
+	font-size: 1.2rem;
+	padding: 1rem 2rem;
+	cursor: pointer;
+}
+
+.upload-image:hover {
+	border: 1px solid rgb(71, 71, 71);
+}
+
+#image {
+	display: none;
+}
+
+.upload-image-div {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	font-size: 1.3rem;
+}
+
+input[type="submit"] {
+	font-size: 1.6rem;
+	width: fit-content;
+	background-color: black;
+	color: white;
+	margin: 0 auto 0 auto;
+	padding: 1.4rem 3.8rem;
+	border-radius: 4rem;
+	cursor: pointer;
+	border: none;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="submit"]:hover {
+	background-color: rgb(53, 52, 52);
+}

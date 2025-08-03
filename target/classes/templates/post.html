@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/post-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="post-div">
+				<div class="author-follow-div">
+					<a class="profile-name-a" th:href="@{'/view-profile/' + ${post.user.userName}}">
+						<img th:src="@{/img/profile.png}" width="22" />
+						<p th:text="${post.user.userName}">Tirendaz AI</p>
+					</a>
+					<span 
+						th:attr="data-user-id=${post.user.id}"
+						th:if="${follow != 'none'}"
+						th:text=${follow}
+						th:class="${follow} + ' following-span'">Following
+					</span>
+				</div>
+				<h2 th:text="${post.title}" class="post-heading">
+					How to Use ChatGPT in Daily Life? Save time and money using
+					ChatGPT
+				</h2>
+				<p th:utext="${post.description}" class="description">
+					Save time and money using Save time and money using ChatGPT
+					Save time and money using ChatGPT
+				</p>
+				<hr class="above-action" />
+				<div class="post-actions-div">
+					<div class="like-div">
+						<img class="like-img" th:src="@{${likeImg}}" height="19" />
+						<span class="like-post-p" th:text="${#lists.size(post.likes)}">136</span>
+					</div>
+					<div class="comment-div">
+						<a href="#comment-input">
+							<img th:src="@{/img/comment2.png}" height="20" />
+						</a>
+						<a href="#comment-h4">
+							<span class="no-of-comments" th:text="${#lists.size(post.comments)}">25</span>
+						</a>
+					</div>
+					<div class="saved-div">
+						<a th:attr="data-post-id=${post.id}" class="save-post">
+							<img class="saved-img" th:src="@{${savedImg}}" height="18" />
+							<span class="saved-post-p" th:text="${#lists.size(post.saves)}">11</span>
+						</a>
+					</div>
+					<p th:text="${postCreated}">Apr 4, 2023</p>
+				</div>
+
+				<img
+					class="post-img"
+					th:src="@{${post.image}}"
+					alt="Post Image, Reload If not shown."
+				/>
+
+				<div class="post-content-div" th:utext="${post.content}"></div>
+				<hr class="above-action" />
+
+				<form
+					class="comment-form"
+					th:action="@{/post-comment}"
+					method="post"
+					th:object="${commentEntity}"
+					id="commentForm"
+				>
+					<label for="comment-input">Leave a Comment: </label>
+					<input type="hidden" name="url" th:value="${post.url}" />
+					<textarea
+						id="comment-input"
+						th:field="*{content}"
+						placeholder="Add comment..."
+						required
+					></textarea>
+					<button type="submit">
+						<img th:src="@{/img/comment-upload.png}" height="38" />
+					</button>
+				</form>
+
+				<hr class="above-action" />
+				<h4 class="comment-h4" id="comment-h4">Comments:</h4>
+				<p class="no-comment"></p>
+				<div class="all-comments-div">
+					<div th:replace=~{fragments/comments::commentList}></div>
+				</div>
+			</div>
+		</div>
+		<script>
+			
+			document
+				.getElementById("commentForm")
+				.addEventListener("submit", function (event) {
+					event.preventDefault();
+
+					const form = event.target;
+					const formData = new FormData(form);
+
+					form.reset();
+					fetch(form.action, {
+						method: "POST",
+						body: formData,
+					})
+					.then((response) => response.text())
+					.then((data) => {
+						const commentsDiv =
+						document.querySelector(".all-comments-div");
+						commentsDiv.innerHTML = data; 
+						var commentCountString = document.querySelector(".no-of-comments").textContent;
+						var commentCount = document.querySelectorAll(".comment-list-div").length;
+						document.querySelector(".no-of-comments").textContent = commentCount;
+						var cmtLikeDivs = document.querySelectorAll(".like-action");
+						deleteCommentAjax();
+						cmtLikeDivs.forEach((div, index) => {
+						scrollBehaviourCheck();
+
+					div.addEventListener("click", ()=>{
+						const commentId = div.getAttribute("data-comment-id");
+						fetch(`/like-comment/${commentId}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify({commentId})
+						})
+						.then(response => response.json())
+						.then(data => {
+							document.querySelector(`.commentLikeP${index}`).textContent = data.commentLikeCount;
+							document.querySelector(`.commentLikeImg${index}`).setAttribute("src", `/img/${data.commentLikeImgSrc}.png`);
+	
+						})
+						// .catch(error => console.error('Error liking comment:', error));
+					});
+				});
+						 
+					})
+					.catch((error) =>
+						console.error("Error posting comment:", error)
+					);
+			});
+
+				//----------------------saved AJAX--------------------------//
+
+				const saved = document.querySelector(".save-post");
+				const postId = saved.getAttribute('data-post-id');
+				saved.addEventListener("click", () => {
+					fetch(`/save-post/${postId}`, {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json'
+						},
+							body: JSON.stringify({ postId })
+						})
+						.then(response => response.json())
+						.then(data => {
+							document.querySelector(".saved-post-p").textContent = data.savedCount;
+							document.querySelector(".saved-img").setAttribute("src", `/img/${data.savedImgSrc}.png`);
+						})
+							.catch(error => console.error("Error saving post:", error));
+				});
+
+				//----------------------Post liked AJAX--------------------------//
+
+				const likeDiv = document.querySelector(".like-div");
+				likeDiv.addEventListener("click", ()=>{
+					fetch(`/like-post/${postId}`, {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json'
+						},
+							body: JSON.stringify({ postId })
+						})
+						.then(response => response.json())
+						.then(data => {
+							document.querySelector(".like-post-p").textContent = data.likeCount;
+							document.querySelector(".like-img").setAttribute("src", `/img/${data.likeImgSrc}.png`);
+						})
+							.catch(error => console.error("Error saving post:", error));
+				});
+
+				//----------------------Post liked AJAX--------------------------//
+
+				function commentlike(){
+					const cmtLikeDivs = document.querySelectorAll(".like-action");
+					cmtLikeDivs.forEach((div, index) => {
+						div.addEventListener("click", ()=>{
+							const commentId = div.getAttribute("data-comment-id");
+							fetch(`/like-comment/${commentId}`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({commentId})
+							})
+							.then(response => response.json())
+							.then(data => {
+								document.querySelector(`.commentLikeP${index}`).textContent = data.commentLikeCount;
+								document.querySelector(`.commentLikeImg${index}`).setAttribute("src", `/img/${data.commentLikeImgSrc}.png`);
+							})
+							.catch(error => console.error('Error liking comment:', error));
+						});
+					});
+				}
+				commentlike();
+				function scrollBehaviourCheck(){				
+					const allCommentsDiv = document.querySelector(".all-comments-div");
+					const commentsHeight = allCommentsDiv.offsetHeight;
+					if(commentsHeight >= 495){
+						allCommentsDiv.style.overflowY = "scroll";
+						allCommentsDiv.style.borderRight = "none";
+						allCommentsDiv.style.paddingTop = "1rem";
+					}
+					else{
+						allCommentsDiv.style.overflowY = "hidden";
+						allCommentsDiv.style.borderRight = "1px solid rgb(217, 217, 217)"
+					}
+
+					if(commentsHeight > 82){
+						allCommentsDiv.style.paddingTop = "1rem";
+						document.querySelector(".no-comment").innerHTML = "";
+						document.querySelector(".no-comment").style.marginBottom = "0rem";
+					}
+					else{
+						allCommentsDiv.style.paddingTop = "3rem";
+						document.querySelector(".no-comment").innerHTML = "No Comments Yet";
+						document.querySelector(".no-comment").style.marginBottom = "-4rem";
+					}
+				}
+				scrollBehaviourCheck();
+
+				//////////////////////// DELETE ////////////////////////////
+
+				function deleteCommentAjax(){
+					const deleteImg = document.querySelectorAll(".delete-action");
+					deleteImg.forEach((div, index) => {
+						const commentId = div.getAttribute("data-comment-id");
+						div.addEventListener("click", ()=>{
+							
+							fetch(`/delete-comment/${commentId}`, {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: JSON.stringify({commentId})
+							})
+							.then(response => response.text())
+							.then(data => {
+								const commentsDiv = document.querySelector(".all-comments-div");
+								commentsDiv.innerHTML = data; 
+								var commentCountString = document.querySelector(".no-of-comments").textContent;
+								var commentCount = document.querySelectorAll(".comment-list-div").length;
+								document.querySelector(".no-of-comments").textContent = commentCount;
+								deleteCommentAjax();
+
+								scrollBehaviourCheck();
+								commentlike();
+							})
+						})
+					});	
+				}
+				deleteCommentAjax();
+				const followingSpan = document.querySelector(".following-span");
+				const userId = followingSpan.getAttribute("data-user-id");
+				followingSpan.addEventListener("click", ()=>{
+					fetch(`/follow-user/${userId}`, {
+						method: "POST",
+						headers: {
+							'Content-Type': 'application/json'
+						},
+							body: JSON.stringify({ postId })
+						})
+						.then(response => response.json())
+						.then(data => {
+							followingSpan.textContent = data.follow;
+						})
+						.catch(error => console.error("Error saving post:", error));
+
+				});
+		</script>
+	</body>
+</html>

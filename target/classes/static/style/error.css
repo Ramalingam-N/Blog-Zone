@@ -1,0 +1,96 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+	position: relative;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div img {
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.error-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+
+.error-div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+	align-items: center;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	width: fit-content;
+	color: rgb(49, 49, 49);
+	top: 50%;
+	left: 50%;
+	animation: fadeIn 1s ease-in-out;
+}
+
+.error-div h2 {
+	font-size: 16rem;
+}
+
+.error-div h4 {
+	font-size: 2.4rem;
+	margin: -2.4rem auto 3rem auto;
+}
+
+.error-div p {
+	font-size: 1.6rem;
+	margin-bottom: 0rem;
+}
+
+.btn {
+	display: inline-block;
+	margin-top: 1rem;
+	padding: 0.8rem 2rem;
+	font-size: 1.2rem;
+	/* color: #fff; */
+	cursor: pointer;
+	/* background-color: #007bff; */
+	text-decoration: none;
+	border-radius: 0.5rem;
+	border: 1px solid rgb(147, 147, 147);
+	/* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+	transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+	/* background-color: #0056b3; */
+	/* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); */
+	/* border: 1px solid black; */
+	background-color: rgb(230, 230, 230);
+}

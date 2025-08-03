@@ -1,0 +1,388 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div a {
+	text-decoration: none;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.write-profile-div {
+	display: flex;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+.write-profile-div a {
+	text-decoration: none;
+	color: black;
+}
+
+.write-div {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.write-div:hover {
+	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+}
+
+.write-div span {
+	font-size: 2rem;
+	font-weight: 100;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+}
+
+.profile-img {
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.profile-img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+.all-post-div {
+	margin: 4rem auto 8rem auto;
+	width: 90rem;
+}
+
+.following-div {
+	display: flex;
+	gap: 2.4rem;
+}
+
+.following-div span {
+	font-size: 1.8rem;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	cursor: pointer;
+	color: rgb(97, 97, 97);
+}
+
+.following-div span:hover {
+	color: black;
+}
+
+.following-search-div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.search-form {
+	background-color: rgb(244, 243, 243);
+	display: flex;
+	align-items: center;
+	border-radius: 2rem;
+}
+
+.search-form input {
+	border-radius: 2rem;
+	padding: 1rem 2rem;
+	border: none;
+	background-color: rgb(246, 246, 246);
+	color: rgb(105, 105, 105);
+}
+
+.search-form input:focus {
+	outline: none;
+}
+
+.search-form input:active {
+	background-color: rgb(246, 246, 246);
+	color: black;
+}
+
+input[type="search"]:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px rgb(246, 246, 246) inset; /* Fills the background */
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	appearance: none;
+}
+
+.search-form button {
+	border: none;
+	padding: 1rem 2rem;
+	background-color: rgb(246, 246, 246);
+	border-radius: 2rem;
+	cursor: pointer;
+}
+
+.below-following-search {
+	margin: 0.6rem 0 3rem 0;
+	border: none;
+	height: 1px;
+	position: relative;
+	background-color: rgb(158, 157, 157);
+	filter: contrast(300%);
+	width: 68%;
+}
+
+.below-following-search1::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 6.2rem;
+	height: 100%;
+	background-color: black;
+	transition: 0.8s;
+}
+
+.below-following-search2::before {
+	content: "";
+	position: absolute;
+	left: 8.4rem;
+	width: 7.4rem;
+	height: 100%;
+	background-color: black;
+	transition: 0.8s;
+}
+
+.saved-post {
+	color: black !important;
+}
+
+.my-post {
+	color: black !important;
+}
+
+.below-following-search3::before {
+	width: 9.2rem;
+}
+
+.below-following-search4::before {
+	width: 7.2rem;
+}
+
+.below-following-search5::before {
+	width: 4.2rem;
+}
+
+.add-black {
+	color: black !important;
+}
+
+.post-div {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.post-full-details {
+	cursor: pointer;
+}
+
+.profile-post-div {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 4rem;
+	/* flex-wrap: wrap; */
+}
+
+.profile-name-div {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.profile-name-a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: black;
+}
+
+.profile-name-a:hover {
+	text-decoration: underline;
+}
+
+.profile-following-a {
+	text-decoration: none;
+}
+
+.profile-name-div p {
+	margin-left: 0.6rem;
+	font-weight: 600 !important;
+	color: #3f3e3e;
+}
+
+.profile-name-div p {
+	font-weight: 375;
+	font-size: 1.8rem;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-name-div span {
+	font-weight: 375;
+	padding: 3px 6px;
+	font-size: 1rem;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: rgb(41, 40, 40);
+	color: white;
+}
+
+.profile-name-div span:hover {
+	background-color: rgb(80, 80, 80);
+}
+
+.post-heading {
+	font-size: 2.8rem;
+	font-family: Tahoma, sans-serif;
+	margin-bottom: 1rem;
+	max-width: 68rem;
+}
+
+.post-description {
+	font-size: 1.8rem;
+	font-family: "Times New Roman", Times, serif;
+	margin-bottom: 2.2rem;
+	max-width: 58rem;
+}
+
+.post-actions-div {
+	display: flex;
+	align-items: center;
+	gap: 1.4rem;
+}
+
+.post-actions-div div {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.post-actions-div div span {
+	font-size: 1.6rem;
+}
+
+.post-actions-div div img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+}
+
+.post-actions-div p {
+	font-weight: 100;
+	font-size: 1.5rem;
+	margin-left: 3rem;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+	color: rgb(75, 74, 74);
+}
+
+.edit {
+	font-size: 1.2rem !important;
+	border: 1px solid rgb(151, 151, 151);
+	padding: 0.3rem 1.2rem;
+	border-radius: 2rem;
+	margin-left: 0.4rem !important;
+}
+
+.edit:hover {
+	color: black;
+	border: 1px solid rgb(48, 48, 48);
+}
+
+.below-post {
+	margin: 3rem 0 3rem 0;
+	border: none;
+	height: 1px;
+	background-color: rgb(158, 157, 157);
+	filter: contrast(300%);
+}
+
+.no-posts {
+	font-size: 1.8rem;
+	color: rgb(71, 71, 71);
+	font-family: Georgia, "Times New Roman", Times, serif;
+	text-align: center;
+	padding-top: 3rem;
+}
+
+.edit-span,
+.delete-span {
+	font-size: 1.2rem !important;
+}
+
+.action-div {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem !important;
+}
+
+.action-div:hover {
+	filter: drop-shadow(0 0 0.1px rgb(19, 19, 19));
+}
+
+.post-full-details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.action-edit {
+	margin-left: 3.6rem;
+	margin-right: 0.2rem;
+}
+
+.below-post1 {
+	margin-top: 2rem;
+}
+
+.none {
+	display: none;
+}
+
+.no-post {
+	display: none;
+	text-align: center;
+	width: fit-content;
+	margin: 8rem auto 0 auto;
+	font-size: 1.8rem;
+	font-family: sans-serif;
+}
+
+.Ok {
+	transition: 1s;
+}

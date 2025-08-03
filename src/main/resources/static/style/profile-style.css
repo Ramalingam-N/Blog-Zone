@@ -1,0 +1,214 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div a {
+	text-decoration: none;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.write-profile-div {
+	display: flex;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+.write-div {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.write-profile-div a {
+	text-decoration: none;
+	color: black;
+}
+
+.write-div:hover {
+	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+}
+
+.write-div span {
+	font-size: 2rem;
+	font-weight: 100;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+}
+
+.profile-img {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+.other-profile-img {
+	filter: none;
+}
+
+.profile-img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+.container {
+	width: 70rem;
+	margin: 3rem auto 3rem auto;
+}
+
+.div-1 {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	padding: 4rem;
+	border-radius: 1rem;
+	background-color: rgb(248, 248, 248);
+}
+
+.line {
+	height: 7rem;
+	border-left: 1px solid rgb(40, 40, 40);
+}
+
+.name-follow-div {
+	display: flex;
+	align-items: center;
+	gap: 4rem;
+	cursor: pointer;
+}
+
+.follow-img:hover {
+	filter: brightness(30);
+}
+
+.div-1 h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 4.2rem;
+}
+
+.div-1 h3 {
+	font-weight: 100;
+	font-family: Geneva, Tahoma, sans-serif;
+	font-size: 1.8rem;
+}
+
+.name-email-div {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 0.4rem;
+}
+
+.div-2,
+.div-3,
+.div-4 {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 2rem 0;
+	padding: 3rem 2rem;
+	font-size: 1.8rem;
+	background-color: rgb(248, 248, 248);
+	border: 1px solid rgb(240, 240, 240);
+	border-radius: 1rem;
+	font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.saved-post-a,
+.logout-a,
+.no-of-div a {
+	text-decoration: none;
+	color: black;
+}
+
+.no-of-div a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.no-of-div a:hover {
+	color: rgb(109, 107, 107);
+}
+
+.div-2 div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1.8rem;
+	cursor: pointer;
+}
+
+.div-2 div:hover {
+	color: rgb(109, 107, 107);
+}
+
+.div-1:hover,
+.div-2:hover,
+.div-3:hover {
+	background-color: rgb(238, 238, 238);
+}
+
+.div-3:hover,
+.div-4:hover {
+	cursor: pointer;
+}
+
+.div-4 {
+	color: rgb(236, 94, 94);
+	cursor: pointer;
+}
+
+.div-4:hover {
+	background-color: rgb(236, 94, 94);
+	color: white;
+}
+
+.div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+	padding: 1.8rem;
+}
+
+.div:hover {
+	color: rgb(89, 89, 89);
+}
+
+.none {
+	display: none;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/error.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				<h1>BlogZone</h1>
+			</div>
+		</nav>
+        <div class="error-container">
+        <div class="error-div">
+            <h2>502</h2>
+            <h4>Bad Gateway</h4>
+            <p>We're having trouble connecting to another server. Please
+                try again in a little while.</p>
+            <a class="btn">Go Back</a>
+        </div>
+    </div>
+    </div>
+    <script>
+            document.querySelector(".btn").addEventListener("click", function () {
+			    history.back();
+			});
+    </script>
+	</body>
+</html>

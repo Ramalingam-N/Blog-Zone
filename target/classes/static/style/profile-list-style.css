@@ -1,0 +1,156 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div a {
+	text-decoration: none;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.write-profile-div {
+	display: flex;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+.write-profile-div a {
+	text-decoration: none;
+	color: black;
+}
+
+.write-div {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.write-div:hover {
+	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+}
+
+.write-div span {
+	font-size: 2rem;
+	font-weight: 100;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+}
+
+.profile-img {
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.profile-img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+h2 {
+	font-size: 3.4rem;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 1rem 2rem;
+	width: fit-content;
+	margin: 2rem auto 0 auto;
+}
+
+.container {
+	width: fit-content;
+	margin: 1rem auto 0 auto;
+	padding: 3rem 5rem;
+	background-color: rgb(247, 247, 247);
+	overflow-y: scroll;
+	max-height: 68vh;
+}
+
+.container div {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	margin-bottom: 2rem;
+}
+
+.container div a {
+	text-decoration: none;
+	color: black;
+	display: flex;
+	gap: 0.6rem;
+	align-items: center;
+}
+
+.container div a:hover {
+	text-decoration: underline;
+}
+
+.container div:last-child {
+	margin-bottom: 0rem;
+}
+
+.container span {
+	font-size: 2rem;
+	color: rgb(71, 71, 71);
+	text-decoration-color: rgb(71, 71, 71);
+}
+
+.container p {
+	background-color: black;
+	color: white;
+	padding: 0.4rem 1.2rem;
+	margin-left: 7rem;
+	cursor: pointer;
+}
+
+.container p:hover {
+	background-color: rgb(82, 82, 82);
+}
+
+.profile-div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.no-users {
+	font-size: 1.6rem !important;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.none {
+	display: none !important;
+}

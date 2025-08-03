@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<body>
+<div class="comment-list-div" th:each="comment, iterStat: ${comments}" th:fragment="commentList">
+    <div class="comment-author-div">
+        <a class="comment-profile-name-a" th:href="@{|/view-profile/${comment.user.userName}|}">
+            <img th:src="@{/img/profile.png}" width="16" />
+            <p th:text="${comment.user.userName}">Tirendaz AI</p>
+        </a>
+        <span th:text="${comment.formattedDate}">Feb 4, 2024</span>
+        <img 
+            th:class="'delete-img-' + ${iterStat.index} + ' delete-action'"
+            th:attr="data-comment-id=${comment.id}"
+            th:src="@{/img/delete.png}" th:height="${height[iterStat.index]}">
+        </img>
+    </div>
+    <div class="comment-content-div">
+        <p class="comment-content" th:utext="${comment.content}">
+            The blog was more informative and it gives the clear vision on the required data.
+        </p>
+        <div th:class="'cmt-like-div-' + ${iterStat.index} + ' comment-action-div like-action'" th:attr="data-comment-id=${comment.id}">
+            <img th:class="'commentLikeImg' + ${iterStat.index}" th:src="${commentLikeImg[iterStat.index]}" height="16" />
+            <p th:class="'commentLikeP' + ${iterStat.index}" th:text="${#lists.size(comment.likes)}">13</p>
+        </div>
+    </div>
+<hr class="below-comment" />
+</div>
+</body>
+</html>

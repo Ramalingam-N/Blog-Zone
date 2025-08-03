@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<div th:each="post, iterStat : ${posts}" class="post-div1" th:fragment="homePosts">
+    <div
+            th:attr="data-post-url=${post.url}"
+            class="post-full-details"
+    >
+        <div class="post-info-div1">
+            <div class="profile-name-div">
+                <a
+                        class="profile-name-a"
+                        th:href="@{'/view-profile/' + ${post.user.userName}}"
+                >
+                    <img
+                            th:src="@{/img/profile.png}"
+                            width="18"
+                    />
+                    <p th:text="${post.user.userName}">
+                        Tirendaz AI
+                    </p>
+                </a>
+                <div
+                        th:class="'profile-following-a ' + ${isFollowing[iterStat.index]}"
+                >
+									<span
+                                            th:attr="data-user-id=${post.user.id}"
+                                            th:class="${isFollowing[iterStat.index]} + ' following-span'"
+                                            th:text="${isFollowing[iterStat.index]}"
+                                    >Following</span
+                                    >
+                </div>
+            </div>
+            <h3 th:text="${post.title}" class="post-heading">
+                How to Use ChatGPT in Daily Life?
+            </h3>
+
+            <p
+                    th:text="${post.description}"
+                    class="post-description"
+            >
+                Save time and money using ChatGPT
+            </p>
+            <div class="post-actions-div">
+                <div class="like-div">
+                    <img
+                            th:class="'post-like' + ${iterStat.index} + ' like-action'"
+                            th:attr="data-post-id=${post.id}"
+                            th:src="@{${isLiked[iterStat.index]}}"
+                            height="19"
+                    />
+                    <span
+                            th:class="'like-span-' + ${iterStat.index}"
+                            th:text="${#lists.size(post.likes)}"
+                    >136</span
+                    >
+                </div>
+                <div class="comment-div">
+                    <img
+                            th:src="@{/img/comment2.png}"
+                            height="20"
+                    />
+                    <span
+                            th:text="${#lists.size(post.comments)}"
+                    >25</span
+                    >
+                </div>
+                <div class="saved-div">
+                    <img
+                            th:class="'post-save' + ${iterStat.index} + ' save-action'"
+                            th:attr="data-post-id=${post.id}"
+                            th:src="@{${isSaved[iterStat.index]}}"
+                            height="18"
+                    />
+                    <span
+                            th:class="'save-span-' + ${iterStat.index}"
+                            th:text="${#lists.size(post.saves)}"
+                    >11</span
+                    >
+                </div>
+                <p th:text="${formatDate[iterStat.index]}">
+                    Apr 4, 2023
+                </p>
+            </div>
+        </div>
+        <div class="post-img-div1">
+            <img
+                    th:src="@{${post.image}}"
+                    height="140"
+                    width="220"
+            />
+        </div>
+    </div>
+    <hr class="below-post below-post1" />
+</div>
+</html>

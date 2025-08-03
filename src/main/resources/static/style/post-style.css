@@ -1,0 +1,329 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 10px;
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: white;
+	overflow-x: hidden;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div a {
+	text-decoration: none;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.write-profile-div {
+	display: flex;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+.write-div {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.write-profile-div a {
+	text-decoration: none;
+	color: black;
+}
+
+.write-div:hover {
+	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+}
+
+.write-div span {
+	font-size: 2rem;
+	font-weight: 100;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+}
+
+.profile-img {
+	cursor: pointer;
+	filter: contrast(90%);
+}
+
+.profile-img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+}
+
+.post-div {
+	width: 90rem;
+	margin: 4rem auto 4rem auto;
+}
+
+.author-follow-div {
+	display: flex;
+	align-items: center;
+	gap: 3rem;
+	margin-bottom: 1.4rem;
+}
+
+.profile-name-a {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-size: 2rem;
+	text-decoration: none;
+	color: rgb(74, 74, 74);
+}
+
+.profile-name-a:hover {
+	text-decoration: underline;
+}
+
+.following-span {
+	text-decoration: none;
+	color: white;
+	padding: 0.4rem 0.8rem;
+	background-color: black;
+}
+
+.following-span:hover {
+	cursor: pointer;
+	background-color: rgb(80, 80, 80);
+}
+
+.null {
+	display: none !important;
+}
+
+.post-heading {
+	font-size: 3rem;
+	font-family: Tahoma, sans-serif;
+	margin-bottom: 1rem;
+	max-width: 80rem;
+}
+
+.description {
+	font-size: 1.8rem;
+	font-family: "Times New Roman", Times, serif;
+	max-width: 70rem;
+}
+
+.post-actions-div {
+	display: flex;
+	align-items: center;
+	gap: 1.8rem;
+	margin-bottom: 2.6rem;
+}
+
+.post-actions-div a {
+	font-size: 1.4rem;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	text-decoration: none;
+	color: black;
+}
+
+.post-actions-div div {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.post-actions-div div span {
+	font-size: 1.6rem;
+}
+
+.post-actions-div div img:hover {
+	filter: drop-shadow(0 0 0.1px rgb(4, 4, 4));
+}
+
+.post-actions-div p {
+	font-weight: 100;
+	font-size: 1.5rem;
+	margin-left: 3rem;
+	font-family: Calibri, "Trebuchet MS", sans-serif;
+	color: rgb(75, 74, 74);
+}
+
+.above-action {
+	margin: 2rem 0 2rem 0;
+	border: none;
+	height: 1px;
+	background-color: rgb(158, 157, 157);
+	filter: contrast(300%);
+}
+
+.post-img {
+	margin-bottom: 3rem;
+	max-height: 50rem;
+	width: 90rem;
+}
+
+.post-content-div {
+	font-size: 1.8rem;
+}
+
+.all-comments-div {
+	margin-bottom: 6rem;
+	max-height: 50rem;
+	border: 1px solid rgb(217, 217, 217);
+	padding: 3rem;
+}
+
+.comment-h4 {
+	font-size: 3.4rem;
+	margin-bottom: 3rem;
+	font-weight: 600;
+	font-family: Tahoma, sans-serif;
+}
+
+.no-comment {
+	margin-bottom: -4rem;
+	font-size: 1.6rem;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.comment-author-div {
+	margin: 2rem 0 1.2rem 0;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
+.comment-author-div a {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-family: Arial, sans-serif;
+	font-weight: 600;
+	font-size: 1.6rem;
+	text-decoration: none;
+	color: rgb(61, 61, 61);
+}
+
+.comment-author-div a:hover {
+	text-decoration: underline;
+}
+
+.comment-author-div span {
+	font-size: 1.2rem;
+	color: rgb(71, 71, 71);
+	margin-bottom: -0.3rem;
+}
+
+.comment-content-div {
+	background-color: rgb(244, 244, 244);
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
+	font-size: 1.8rem;
+	height: auto;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.comment-content {
+	padding: 2rem 1rem 2rem 2rem;
+	margin-left: 1.4rem;
+}
+
+.comment-action-div {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 0.6rem;
+	font-size: 1.4rem;
+	padding-right: 3rem;
+}
+
+.comment-action-div img:hover {
+	cursor: pointer;
+	filter: drop-shadow(0 0 0.1px rgb(15, 15, 15));
+}
+
+.below-comment {
+	/* margin: 2rem 0 2rem 0; */
+	border: none;
+	height: 1px;
+	background-color: rgb(229, 229, 229);
+	/* filter: contrast(300%); */
+}
+
+.comment-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.comment-form label {
+	font-size: 2.4rem;
+	font-weight: 600;
+	font-family: Geneva, Tahoma, sans-serif;
+	margin-bottom: 1rem;
+}
+
+.comment-form textarea {
+	width: 50rem;
+	height: 15rem;
+	font-size: 1.6rem;
+	padding: 1.4rem;
+	font-family: "Times New Roman", Times, serif;
+	margin-bottom: 1rem;
+	background-color: rgb(246, 246, 246);
+	border: 1px solid rgb(159, 158, 158);
+}
+
+textarea:focus,
+textarea:hover {
+	outline: none;
+	border: 1px solid rgb(46, 45, 45);
+}
+
+.comment-form button {
+	width: fit-content;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+	margin-bottom: -1rem;
+}
+
+.comment-form button img:hover {
+	filter: contrast(50%);
+}
+
+.delete-action {
+	margin-left: 1rem;
+	cursor: pointer;
+}

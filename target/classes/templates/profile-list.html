@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/profile-list-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<h2 th:text="${name}">Followers</h2>
+		<div class="container">
+			<span
+				class="no-users"
+				th:if="${#lists.isEmpty(followers)}"
+				th:text="'No '+${name}+' Yet...'"
+			></span>
+			<div th:each="user, iterStat: ${followers}" class="profile-div">
+				<a th:href="@{'/view-profile/'+${user.userName}}">
+					<img th:src="@{/img/profile.png}" height="20" />
+					<span th:text="${user.userName}">Liam Bennett</span>
+				</a>
+				<p
+					th:attr="data-user-id=${user.id}"
+					th:text="${follow[iterStat.index]}"
+					th:class="'following' + ${iterStat.index} +' '+${follow[iterStat.index]}+ ' following-span'"
+				>
+					Following
+				</p>
+			</div>
+		</div>
+		<script>
+			const followingSpan = document.querySelectorAll(".following-span");
+
+			followingSpan.forEach((div, index) => {
+				const userId = div.getAttribute("data-user-id");
+				div.addEventListener("click", () => {
+					fetch(`/follow-user/${userId}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ userId }),
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							div.textContent = data.follow;
+						})
+						.catch((error) =>
+							console.error("Error saving post:", error)
+						);
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/profile-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<a th:href="@{/profile}">
+					<img
+						class="profile-img other-profile-img"
+						th:src="@{/img/profile1.png}"
+						height="38"
+				/></a>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="div-1">
+				<img th:src="@{/img/profile.png}" height="70" />
+				<div class="line"></div>
+				<div class="name-email-div">
+					<div class="name-follow-div">
+						<h2 th:text="${user.userName}">John Doe</h2>
+						<img
+							th:title="${follow}"
+							th:attr="data-user-id=${user.id}"
+							th:class="'follow-img '+ ${checking}"
+							th:src="@{|/img/${follow}.png|}"
+							height="30"
+						/>
+					</div>
+					<h3 th:text="${user.email}">johndoe3922@gmail.com</h3>
+				</div>
+			</div>
+
+			<a
+				class="saved-post-a"
+				th:href="@{'/view-posts/' + ${user.userName}}"
+			>
+				<div class="div-2 div">
+					<span th:text="${#lists.size(user.myPosts)}">17</span>
+					<p>Posts</p>
+				</div>
+			</a>
+
+			<a
+				class="saved-post-a"
+				th:href="@{'/'+${user.userName} +'/followers' }"
+			>
+				<div class="div-2 div">
+					<span
+						class="follower-span"
+						th:text="${#lists.size(user.followers)}"
+						>163</span
+					>
+					<p>Followers</p>
+				</div>
+			</a>
+
+			<a
+				class="saved-post-a"
+				th:href="@{'/'+${user.userName} +'/following' }"
+			>
+				<div class="div-2 div">
+					<span th:text="${#lists.size(user.following)}">219</span>
+					<p>Following</p>
+				</div>
+			</a>
+		</div>
+		<script>
+			function followImgAJAX() {
+				const followImg = document.querySelector(".follow-img");
+				const userId = followImg.getAttribute("data-user-id");
+				const followerSpan = document.querySelector(".follower-span");
+				followImg.addEventListener("click", () => {
+					console.log("Ok...");
+					fetch(`/follow-user/${userId}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ userId }),
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							if (data.follow == "Following") {
+								followImg.setAttribute(
+									"src",
+									`/img/Following.png`
+								);
+							} else {
+								followImg.setAttribute(
+									"src",
+									`/img/Follow.png`
+								);
+							}
+							followImg.setAttribute("title", data.follow);
+							followerSpan.textContent = data.followerCount;
+							// followImgAJAX();
+						})
+						.catch((error) =>
+							console.error("Error saving post:", error)
+						);
+				});
+			}
+			followImgAJAX();
+		</script>
+	</body>
+</html>

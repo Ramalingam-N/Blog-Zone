@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/login-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				<h1>BlogZone</h1>
+			</div>
+		</nav>
+
+		<div class="container">
+			<h1>LOGIN</h1>
+			<form role="form" th:action="@{/login}" method="POST">
+				<p
+					class="loginError"
+					th:if="${param.error}"
+					th:text="'Invalid email or password.'"
+				></p>
+				<p
+					class="logoutError"
+					th:if="${param.logout}"
+					th:text="'You have been logged out'"
+				></p>
+				<input
+					type="email"
+					name="email"
+					required
+					placeholder="E-mail Address *"
+				/>
+				<input
+					type="password"
+					name="password"
+					minlength="6"
+					oninput="validatePassword(this)"
+					title="Password must be atleast six digit"
+					required
+					placeholder="Password *"
+				/>
+				<input type="submit" value="Login" />
+			</form>
+			<div class="register-div">
+				<p>Don't have account?&nbsp;</p>
+				<a th:href="@{/register}">Register</a>
+			</div>
+		</div>
+		<script>
+			setTimeout(() => {
+				document.querySelector(".logoutError").style.display = "none";
+			}, 7000);
+			setInterval(() => {
+				document.querySelector(".logoutError").style.backgroundColor =
+					" #59a2ea";
+			}, 500);
+			setInterval(() => {
+				document.querySelector(".logoutError").style.backgroundColor =
+					"#2f87e0";
+			}, 1000);
+			function validatePassword(input) {
+				// Check if the input violates the minlength rule
+				if (input.validity.tooShort) {
+					input.setCustomValidity(
+						"Password must be at least six digit."
+					); // Custom message
+				} else {
+					input.setCustomValidity(""); // Clear custom message when valid
+				}
+			}
+		</script>
+	</body>
+</html>

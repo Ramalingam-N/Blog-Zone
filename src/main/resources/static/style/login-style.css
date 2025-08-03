@@ -1,0 +1,137 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+html {
+	font-size: 10px;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	height: 7rem;
+	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
+	justify-content: space-between;
+	padding: 0 6rem;
+}
+
+.logo-name-div {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+.logo-name-div img {
+	cursor: pointer;
+	filter: contrast(45%);
+}
+
+.logo-name-div h1 {
+	font-size: 3rem;
+	cursor: pointer;
+	color: rgb(71, 71, 71);
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 3rem;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	gap: 2.6rem;
+	width: fit-content;
+	/* margin: 4rem auto 0 auto; */
+	position: fixed;
+	top: 48%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* background-color: rgb(221, 221, 221); */
+	/* box-shadow: 0 0 8px 2px rgb(201, 201, 201); */
+}
+
+.container2 {
+	top: 50% !important;
+	transform: translate(-50%, -50%);
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 1.8rem;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+	width: 35rem;
+	height: 4rem;
+	font-size: 1.4rem;
+	padding: 1.8rem;
+	border: none;
+	box-shadow: 0 0 0 1px rgb(193, 191, 191);
+	background-color: rgb(244, 243, 243);
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:hover,
+input[type="text"]:hover,
+input[type="password"]:hover {
+	outline: none;
+	background-color: rgb(233, 233, 233);
+	/* box-shadow: 0 0 0 1px rgb(112, 112, 112); */
+}
+
+input[type="submit"] {
+	width: 35rem;
+	height: 4.4rem;
+	border: none;
+	background-color: rgb(57, 56, 56);
+	color: white;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background-color: rgb(79, 78, 78);
+}
+
+.register-div {
+	font-size: 1.6rem;
+	display: flex;
+	align-items: center;
+	gap: 0.2rem;
+	text-decoration: none;
+}
+
+.red-alert {
+	border: 1px solid rgb(196, 65, 65) !important;
+}
+
+.mismatch-error-text,
+.loginError {
+	font-size: 1.3rem;
+	font-family: Arial, sans-serif;
+	margin-bottom: -1rem;
+	color: red;
+}
+
+.mismatch {
+	display: none;
+}
+
+.logoutError {
+	width: 35rem;
+	color: #fff;
+	background-color: #2f87e0;
+	padding: 1.2rem 0;
+	text-align: center;
+	font-size: 1.4rem;
+	transition: 0.5s;
+	border-radius: 4px;
+	letter-spacing: 1.1px;
+}

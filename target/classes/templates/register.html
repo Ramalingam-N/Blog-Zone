@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/login-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				<h1>BlogZone</h1>
+			</div>
+		</nav>
+
+		<div class="container container2">
+			<h1>REGISTER</h1>
+			<form th:action="@{/register}" method="POST" th:object="${user}">
+				<p class="mismatch mismatch-error-text" id="one">
+					Password and Confirm Password doesn't match.
+				</p>
+				<p
+					th:if="${userNameError}"
+					th:text="${userNameError}"
+					class="mismatch-error-text"
+				></p>
+				<p
+					th:if="${emailError}"
+					th:text="${emailError}"
+					class="mismatch-error-text"
+				></p>
+				<input
+					type="text"
+					name="username"
+					th:field="*{userName}"
+					required
+					placeholder="User Name *"
+				/>
+				<input
+					type="email"
+					name="email"
+					th:field="*{email}"
+					required
+					placeholder="E-mail Address *"
+				/>
+
+				<input
+					type="password"
+					id="password"
+					class=""
+					name="password"
+					th:field="*{password}"
+					required
+					placeholder="Password *"
+					minlength="6"
+					oninput="validatePassword(this)"
+					title="Password must be atleast six digit"
+				/>
+				<input
+					type="password"
+					id="confirmPassword"
+					class=""
+					name="confirmPassword"
+					minlength="6"
+					required
+					placeholder="Confirm Password *"
+					oninput="validatePassword(this)"
+					title="Password must be atleast six digit"
+				/>
+				<input class="submit" type="submit" value="Register" />
+			</form>
+			<div class="register-div">
+				<p>Already registered?&nbsp;</p>
+				<a th:href="@{/login}">Login</a>
+			</div>
+		</div>
+		<script>
+			var one = document.querySelector("#one");
+			var password = document.querySelector("#password");
+			var confirmPassword = document.querySelector("#confirmPassword");
+			document
+				.querySelector("form")
+				.addEventListener("submit", (event) => {
+					if (!(password.value == confirmPassword.value)) {
+						event.preventDefault();
+						one.classList.remove("mismatch");
+						password.classList.add("red-alert");
+						confirmPassword.classList.add("red-alert");
+						password.value = "";
+						confirmPassword.value = "";
+					}
+				});
+			function validatePassword(input) {
+				// Check if the input violates the minlength rule
+				if (input.validity.tooShort) {
+					input.setCustomValidity(
+						"Password must be at least six digit."
+					); // Custom message
+				} else {
+					input.setCustomValidity(""); // Clear custom message when valid
+				}
+			}
+		</script>
+	</body>
+</html>

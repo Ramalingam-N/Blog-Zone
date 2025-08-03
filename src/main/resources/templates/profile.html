@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Blog Zone</title>
+		<link rel="stylesheet" th:href="@{/style/profile-style.css}" />
+		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
+	</head>
+	<body>
+		<nav>
+			<div class="logo-name-div">
+				<a th:href="@{/}">
+					<img th:src="@{/img/logo1.png}" height="32" width="30" />
+				</a>
+				<a th:href="@{/}">
+					<h1>BlogZone</h1>
+				</a>
+			</div>
+			<div class="write-profile-div">
+				<a th:href="@{/write}">
+					<div class="write-div">
+						<img th:src="@{/img/create-blog.png}" height="22" />
+						<span>Write</span>
+					</div>
+				</a>
+				<img
+					class="profile-img"
+					th:src="@{/img/profile1.png}"
+					height="38"
+				/>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="div-1">
+				<img th:src="@{/img/profile.png}" height="70" />
+				<div class="line"></div>
+				<div class="name-email-div">
+					<h2 th:text="${user.userName}">John Doe</h2>
+					<h3 th:text="${user.email}">johndoe3922@gmail.com</h3>
+				</div>
+			</div>
+			<div class="div-2">
+				<div class="no-of-div">
+					<a th:href="@{'/my-posts/' + ${user.userName}}">
+						<span th:text="${user.myPosts.size()}">23</span>
+						<p>Posts</p>
+					</a>
+				</div>
+				<div class="no-of-div">
+					<a th:href="@{${user.userName} +'/followers' }">
+						<span th:text="${user.followers.size()}">114</span>
+						<p>Followers</p>
+					</a>
+				</div>
+				<div class="no-of-div">
+					<a th:href="@{${user.userName} +'/following' }">
+						<span th:text="${user.following.size()}">223</span>
+						<p>Following</p>
+					</a>
+				</div>
+			</div>
+			<a
+				class="saved-post-a"
+				th:href="@{'/saved-posts/' + ${user.userName}}"
+			>
+				<div class="div-3">
+					<p>Saved Posts</p>
+				</div>
+			</a>
+			<a class="logout-a" th:href="@{/logout}">
+				<div class="div-4">
+					<p>Logout</p>
+				</div>
+			</a>
+		</div>
+	</body>
+</html>
