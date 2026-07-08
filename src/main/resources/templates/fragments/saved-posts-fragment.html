@@ -7,7 +7,7 @@
 	>
 		<div class="profile-post-div" th:attr="data-post-url=${post.url}">
 			<div class="post-img-div">
-				<img th:src="@{${post.image}}" height="120" width="200" />
+				<img th:src="@{'/post/image/' + ${post.id}}" height="120" width="200" />
 			</div>
 			<div class="post-info-div">
 				<h3 th:text="${post.title}" class="post-heading">

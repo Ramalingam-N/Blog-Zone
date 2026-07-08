@@ -16,7 +16,6 @@ import java.util.*;
 public class PostController {
     private final PostService postService;
     private final UserService userService;
-    private final FileStorageService fileStorageService;
     private final CommentService commentService;
     private final SavedService savedService;
     private final PostLikeService postLikeService;
@@ -24,14 +23,12 @@ public class PostController {
 
     public PostController(PostService postService,
                           UserService userService,
-                          FileStorageService fileStorageService,
                           CommentService commentService,
                           SavedService savedService,
                           PostLikeService postLikeService,
                           CommentLikeService commentLikeService){
         this.postService = postService;
         this.userService = userService;
-        this.fileStorageService = fileStorageService;
         this.commentService = commentService;
         this.savedService = savedService;
         this.postLikeService = postLikeService;
@@ -111,10 +108,22 @@ public class PostController {
         return "post";
     }
 
+    @GetMapping("/post/image/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> serveImage(@PathVariable("id") Long id) {
+        Post post = postService.findPostById(id);
+        if (post != null && post.getImage() != null) {
+            return ResponseEntity.ok()
+                    .header(org.springframework.http.HttpHeaders.CONTENT_TYPE, "image/jpeg") 
+                    .body(post.getImage());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/post-comment")
     public String uploadComment(@ModelAttribute("commentEntity") Comment comment,
                                 @RequestParam("url") String url,
-                                Model model) throws InterruptedException {
+                                Model model) {
         Post post = postService.findByUrl(url);
         String email = SecurityUtils.getCurrentUser().getUsername();
         User user = userService.findByEmail(email);
@@ -148,13 +157,11 @@ public class PostController {
             }
         }
         model.addAttribute("height", delete);
-
-        Thread.sleep(1000);
         return "fragments/comments :: commentList";
     }
 
     @PostMapping("/delete-comment/{commentId}")
-    public String deleteComment(@PathVariable("commentId") Long commentId, Model model) throws InterruptedException {
+    public String deleteComment(@PathVariable("commentId") Long commentId, Model model) {
         Post post = postService.findByCommentId(commentId);
         commentService.deleteById(commentId);
         String email = SecurityUtils.getCurrentUser().getUsername();
@@ -187,8 +194,6 @@ public class PostController {
             }
         }
         model.addAttribute("height", delete);
-
-        Thread.sleep(1000);
         return "fragments/comments :: commentList";
     }
 
@@ -199,16 +204,14 @@ public class PostController {
         return "write-post";
     }
     @PostMapping("/write")
-    public String writePostUpload(@ModelAttribute("post") Post post, @RequestParam("image1") MultipartFile imageFile) throws IOException, InterruptedException {
+    public String writePostUpload(@ModelAttribute("post") Post post, @RequestParam("image1") MultipartFile imageFile) throws IOException {
         String url = postService.generateUrl();
         post.setUrl(url);
-        String imagePath = fileStorageService.storeFile(imageFile, url);
-        post.setImage(postService.formatImagePath(imagePath));
+        post.setImage(imageFile.getBytes());
         String email = SecurityUtils.getCurrentUser().getUsername();
         User user = userService.findByEmail(email);
         post.setUser(user);
         postService.savePost(post);
-        Thread.sleep(5000);
         return "redirect:/post/"+url;
     }
 
@@ -361,14 +364,15 @@ public class PostController {
     }
 
     @PostMapping("/edit/{id}")
-    public String saveEditedPost(@PathVariable("id") Long id, @ModelAttribute("post") Post post, @RequestParam("image1") MultipartFile imageFile) throws IOException, InterruptedException {
+    public String saveEditedPost(@PathVariable("id") Long id, @ModelAttribute("post") Post post, @RequestParam("image1") MultipartFile imageFile) throws IOException {
         Post existingPost = postService.findPostById(id);
         existingPost.setTitle(post.getTitle());
         existingPost.setDescription(post.getDescription());
         existingPost.setContent(post.getContent());
         existingPost.setUrl(post.getUrl());
-        Thread.sleep(7000);
-        String imagePath = fileStorageService.storeFile(imageFile, post.getUrl());
+        if (!imageFile.isEmpty()) {
+            existingPost.setImage(imageFile.getBytes());
+        }
         String email = SecurityUtils.getCurrentUser().getUsername();
         User user = userService.findByEmail(email);
         existingPost.setUser(user);
@@ -378,7 +382,6 @@ public class PostController {
 
     @GetMapping("/delete-post/{id}")
     public String deletePost(@PathVariable("id") Long id){
-        fileStorageService.deleteImage(postService.findPostById(id).getImage());
         postService.deleteById(id);
         String email = SecurityUtils.getCurrentUser().getUsername();
         User user = userService.findByEmail(email);

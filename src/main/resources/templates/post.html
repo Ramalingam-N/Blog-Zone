@@ -78,7 +78,7 @@
 
 				<img
 					class="post-img"
-					th:src="@{${post.image}}"
+					th:src="@{'/post/image/' + ${post.id}}"
 					alt="Post Image, Reload If not shown."
 				/>
 

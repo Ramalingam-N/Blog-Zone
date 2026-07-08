@@ -11,17 +11,26 @@ import java.util.Set;
 
 
 public interface PostRepository extends JpaRepository<Post, Long> {
+    
     Post findByUrl(String url);
+    
     @Query("SELECT MAX(p.id) FROM Post p")
     Long findMaxId();
+
+    List<Post> findAllByOrderByCreatedOnDesc();
+    
     @Query("SELECT COUNT(s) FROM Saved s WHERE s.post = :post")
     Long countAllSaved(@Param("post") Post post);
+    
     @Query("SELECT COUNT(p) FROM PostLike p WHERE p.post = :post")
     Long countAllLike(@Param("post") Post post);
+    
     @Query("SELECT p FROM Post p WHERE p.user.userName = :userName")
     List<Post> findAllPostsByUserName(String userName);
+    
     @Query("SELECT s.post FROM Saved s WHERE s.user.userName = :userName")
     List<Post> findAllSavedPostByUserName(String userName);
+    
     @Query("SELECT c.post FROM Comment c WHERE c.id = :commentId")
     Post findByCommentId(@Param("commentId") Long commentId);
 

@@ -84,7 +84,7 @@
         </div>
         <div class="post-img-div1">
             <img
-                    th:src="@{${post.image}}"
+                    th:src="@{'/post/image/' + ${post.id}}"
                     height="140"
                     width="220"
             />

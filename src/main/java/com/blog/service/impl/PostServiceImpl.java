@@ -4,6 +4,8 @@ import com.blog.entity.Post;
 import com.blog.entity.User;
 import com.blog.repository.PostRepository;
 import com.blog.service.PostService;
+
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -101,7 +103,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> allPosts() {
-        return postRepository.findAll();
+        return postRepository.findAllByOrderByCreatedOnDesc();
     }
 
     @Override

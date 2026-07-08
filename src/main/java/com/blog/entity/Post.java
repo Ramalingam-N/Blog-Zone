@@ -39,8 +39,9 @@ public class Post {
     @Column(unique = true)
     private String url;
 
-    @Column(unique = true)
-    private String image;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostLike> likes = new HashSet<>();
