@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
 * {
-	margin: 0;
-	box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-	font-size: 10px;
+    font-size: 10px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -153,4 +157,43 @@ h2 {
 
 .none {
 	display: none !important;
+}
+
+/* ================= RESPONSIVE LAYOUT ================= */
+@media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .logo-name-div h1 { font-size: 2.2rem; }
+    
+    h2 { 
+        font-size: 2.4rem; 
+        text-align: center;
+    }
+    
+    .container {
+        width: 100%;
+        padding: 2rem 4rem;
+        background-color: transparent;
+    }
+    
+    .profile-div {
+        display: flex;
+        flex-direction: row; 
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 0;
+        border-bottom: 1px solid rgb(235, 235, 235);
+    }
+    
+    .container div {
+        margin-bottom: 0;
+    }
+
+    .container p {
+        margin-left: 0;
+        width: fit-content;
+        padding: 0.6rem 1.6rem;
+        border-radius: 2rem; 
+        font-size: 1.3rem;
+        text-align: center;
+    }
 }

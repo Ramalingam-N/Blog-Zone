@@ -5,14 +5,13 @@ import com.blog.entity.User;
 import com.blog.repository.PostRepository;
 import com.blog.service.PostService;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -20,26 +19,15 @@ public class PostServiceImpl implements PostService {
     public PostServiceImpl(PostRepository postRepository){
         this.postRepository = postRepository;
     }
+
     @Override
     public void savePost(Post post) {
         postRepository.save(post);
     }
+
     @Override
     public String generateUrl() {
-        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
-        SecureRandom random = new SecureRandom();
-        int length = 8;
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(CHARACTERS.length());
-            sb.append(CHARACTERS.charAt(index));
-        }
-        long totalPosts = 0;
-        if(postRepository.findMaxId() != null){
-            totalPosts = postRepository.findMaxId();
-        }
-        sb.append(totalPosts+1);
-        return sb.toString();
+        return UUID.randomUUID().toString().replace("-", "").substring(0, 10);
     }
 
     @Override

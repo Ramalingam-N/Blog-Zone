@@ -1,7 +1,6 @@
 package com.blog.service.impl;
 
 import com.blog.entity.Comment;
-import com.blog.entity.Post;
 import com.blog.repository.CommentRepository;
 import com.blog.service.CommentService;
 import org.springframework.stereotype.Service;

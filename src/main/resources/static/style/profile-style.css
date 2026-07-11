@@ -1,214 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
 * {
-	margin: 0;
-	box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-	font-size: 10px;
+    font-size: 10px;
+    scroll-behavior: smooth;
 }
 
 body {
-	background-color: white;
-	overflow-x: hidden;
+    background-color: white;
+    overflow-x: hidden;
 }
 
 nav {
-	display: flex;
-	align-items: center;
-	width: 100vw;
-	height: 7rem;
-	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
-	justify-content: space-between;
-	padding: 0 6rem;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 7rem;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    padding: 0 6rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
 }
 
 .logo-name-div {
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .logo-name-div a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .logo-name-div img {
-	cursor: pointer;
-	filter: contrast(45%);
+    cursor: pointer;
+    filter: contrast(45%);
 }
 
 .logo-name-div h1 {
-	font-size: 3rem;
-	cursor: pointer;
-	color: rgb(71, 71, 71);
-	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 3rem;
+    cursor: pointer;
+    color: rgb(71, 71, 71);
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .write-profile-div {
-	display: flex;
-	align-items: center;
-	gap: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
 }
 
 .write-div {
-	display: flex;
-	align-items: center;
-	gap: 0.4rem;
-	cursor: pointer;
-	filter: contrast(90%);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    filter: contrast(90%);
 }
 
 .write-profile-div a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .write-div:hover {
-	filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
+    filter: drop-shadow(0 0 0.1px rgb(68, 68, 68));
 }
 
 .write-div span {
-	font-size: 2rem;
-	font-weight: 100;
-	font-family: Calibri, "Trebuchet MS", sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+    font-family: Calibri, "Trebuchet MS", sans-serif;
 }
 
 .profile-img {
-	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+    filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
 }
 
 .other-profile-img {
-	filter: none;
+    filter: none;
 }
 
 .profile-img:hover {
-	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+    filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
 }
 
 .container {
-	width: 70rem;
-	margin: 3rem auto 3rem auto;
+    width: 100%;
+    max-width: 70rem;
+    margin: 3rem auto 3rem auto;
 }
 
 .div-1 {
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-	padding: 4rem;
-	border-radius: 1rem;
-	background-color: rgb(248, 248, 248);
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 4rem;
+    border-radius: 12px;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(240, 240, 240);
+    transition: all 0.2s ease;
 }
 
 .line {
-	height: 7rem;
-	border-left: 1px solid rgb(40, 40, 40);
+    height: 7rem;
+    border-left: 1px solid rgb(200, 200, 200);
 }
 
 .name-follow-div {
-	display: flex;
-	align-items: center;
-	gap: 4rem;
-	cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    cursor: pointer;
 }
 
 .follow-img:hover {
-	filter: brightness(30);
+    filter: brightness(30);
 }
 
 .div-1 h2 {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 4.2rem;
+    font-weight: 600;
+    font-size: 3.6rem;
+    color: #1a1a1a;
 }
 
 .div-1 h3 {
-	font-weight: 100;
-	font-family: Geneva, Tahoma, sans-serif;
-	font-size: 1.8rem;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: #666;
+    margin-top: 0.4rem;
 }
 
 .name-email-div {
-	display: flex;
-	flex-direction: column;
-	align-items: start;
-	gap: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
 .div-2,
 .div-3,
 .div-4 {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	margin: 2rem 0;
-	padding: 3rem 2rem;
-	font-size: 1.8rem;
-	background-color: rgb(248, 248, 248);
-	border: 1px solid rgb(240, 240, 240);
-	border-radius: 1rem;
-	font-family: Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 2.5rem 2rem;
+    font-size: 1.8rem;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 12px;
+    transition: all 0.2s ease;
 }
 
 .saved-post-a,
 .logout-a,
 .no-of-div a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .no-of-div a {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.no-of-div a:hover {
-	color: rgb(109, 107, 107);
+.no-of-div span {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #1a1a1a;
 }
 
-.div-2 div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	font-size: 1.8rem;
-	cursor: pointer;
+.no-of-div p {
+    font-size: 1.6rem;
+    color: #666;
 }
 
-.div-2 div:hover {
-	color: rgb(109, 107, 107);
+.no-of-div a:hover span, .no-of-div a:hover p {
+    color: rgb(80, 80, 80);
 }
 
 .div-1:hover,
 .div-2:hover,
 .div-3:hover {
-	background-color: rgb(238, 238, 238);
+    background-color: rgb(252, 252, 252);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.div-3:hover,
-.div-4:hover {
-	cursor: pointer;
+.div-3, .div-4 {
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .div-4 {
-	color: rgb(236, 94, 94);
-	cursor: pointer;
+    color: rgb(220, 53, 69);
+    border: 1px solid rgba(220, 53, 69, 0.2);
 }
 
 .div-4:hover {
-	background-color: rgb(236, 94, 94);
-	color: white;
-}
-
-.div {
-	display: flex;
-	flex-direction: column;
-	gap: 0.6rem;
-	padding: 1.8rem;
-}
-
-.div:hover {
-	color: rgb(89, 89, 89);
+    background-color: rgb(220, 53, 69);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
 }
 
 .none {
-	display: none;
+    display: none;
+}
+
+/* ================= RESPONSIVE POST LAYOUT ================= */
+@media (max-width: 768px) {
+    nav { 
+        padding: 0 1.5rem; 
+    }
+    
+    .logo-name-div h1 { 
+        font-size: 2.2rem; 
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .div-1 {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 1.5rem;
+    }
+
+    .line {
+        display: none;
+    }
+
+    .name-email-div {
+        align-items: center;
+    }
+
+    .div-1 h2 {
+        font-size: 2.8rem;
+    }
+
+    .div-2 {
+        padding: 2rem 1rem;
+    }
+
+    .no-of-div span {
+        font-size: 2rem;
+    }
+
+    .no-of-div p {
+        font-size: 1.4rem;
+    }
 }

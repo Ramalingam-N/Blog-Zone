@@ -2,7 +2,6 @@ package com.blog.service;
 
 import com.blog.entity.Post;
 import com.blog.entity.PostLike;
-import com.blog.entity.Saved;
 import com.blog.entity.User;
 import org.springframework.stereotype.Service;
 

@@ -1,165 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
 * {
-	margin: 0;
-	box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-	font-size: 10px;
+    font-size: 10px;
+    scroll-behavior: smooth;
 }
 
 body {
-	background-color: white;
-	overflow-x: hidden;
+    background-color: white;
+    overflow-x: hidden;
 }
 
 nav {
-	display: flex;
-	align-items: center;
-	width: 100vw;
-	height: 7rem;
-	box-shadow: 0 2px 4px 2px rgb(209, 209, 209);
-	justify-content: space-between;
-	padding: 0 6rem;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 7rem;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    padding: 0 6rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
 }
 
 .logo-name-div {
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .logo-name-div a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .logo-name-div img {
-	cursor: pointer;
-	filter: contrast(45%);
+    cursor: pointer;
+    filter: contrast(45%);
 }
 
 .logo-name-div h1 {
-	font-size: 3rem;
-	cursor: pointer;
-	color: rgb(71, 71, 71);
-	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 3rem;
+    cursor: pointer;
+    color: rgb(71, 71, 71);
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .profile-img {
-	cursor: pointer;
-	filter: contrast(90%);
+    cursor: pointer;
+    filter: contrast(90%);
 }
 
 .profile-img:hover {
-	filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
+    filter: drop-shadow(0 0 0.1px rgb(0, 0, 0));
 }
 
 .container {
-	width: 80rem;
-	margin: 3rem auto 3rem auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    width: 100%;
+    max-width: 80rem;
+    margin: 3rem auto 8rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
 }
 
 .container h2 {
-	font-size: 2.8rem;
-	border-radius: 2.6rem;
-	text-align: center;
-	width: fit-content;
-	font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
 }
 
 form {
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-	/* width: fit-content; */
-	margin: 2rem auto 4rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: 100%;
+    margin: 2rem auto;
 }
+
 input[type="text"] {
-	width: 80rem;
-	font-size: 2.6rem;
-	font-weight: 600;
-	color: rgb(71, 70, 70);
-	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-	padding: 0 2rem;
-	height: 6rem;
-	border: none;
-	border-bottom: 1px solid rgb(197, 197, 197);
+    width: 100%; 
+    font-size: 3.4rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    padding: 1rem 0;
+    height: auto;
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    background-color: transparent;
 }
 
-input[type="text"]:focus,
-input[type="text"]:hover {
-	outline: none;
-	border-bottom: 1px solid rgb(137, 137, 137);
+input[type="text"]::placeholder {
+    color: rgb(180, 180, 180);
 }
 
-textarea {
-	min-height: 8rem;
-	font-size: 1.6rem;
-	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-	padding: 1rem 2rem;
-	border: 1px solid rgb(197, 197, 197);
+input[type="text"]:focus {
+    outline: none;
+    border-bottom: 1px solid #1a1a1a;
 }
 
-textarea:focus,
-textarea:hover {
-	box-shadow: 0 0 1px 1px rgb(204, 203, 203);
+textarea[name="description"] {
+    width: 100%;
+    min-height: 8rem;
+    font-size: 1.8rem;
+    padding: 1.5rem;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 8px;
+    background-color: rgb(250, 250, 250);
+    resize: vertical;
 }
 
-textarea:focus {
-	outline: none;
+textarea[name="description"]:focus {
+    outline: none;
+    border: 1px solid rgb(150, 150, 150);
+    background-color: white;
+}
+
+.ck-editor {
+    width: 100% !important;
 }
 
 .ck-editor__editable {
-	min-height: 14rem;
-	font-size: 1.8rem;
-	width: 80rem;
+    min-height: 35rem !important;
+    font-size: 1.8rem !important;
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
 }
 
-.ck-editor__editable:hover {
-	box-shadow: 0 0 1px 1px rgb(204, 203, 203);
-}
-
-.upload-image {
-	border: 1px solid rgb(170, 170, 170);
-	width: fit-content;
-	font-size: 1.2rem;
-	padding: 1rem 2rem;
-	cursor: pointer;
-}
-
-.upload-image:hover {
-	border: 1px solid rgb(71, 71, 71);
-}
-
-#image {
-	display: none;
+.ck-toolbar {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+    background-color: rgb(250, 250, 250) !important;
 }
 
 .upload-image-div {
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-	font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
+
+.upload-image {
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgb(248, 248, 248);
+    font-weight: 600;
+    padding: 1.2rem 2.4rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-image:hover {
+    border: 1px solid #1a1a1a;
+    background-color: white;
+}
+
+#image {
+    display: none;
+}
+
+.upload-status {
+    font-weight: 600;
 }
 
 input[type="submit"] {
-	font-size: 1.6rem;
-	width: fit-content;
-	background-color: black;
-	color: white;
-	margin: 0 auto 0 auto;
-	padding: 1.4rem 3.8rem;
-	border-radius: 4rem;
-	cursor: pointer;
-	border: none;
-	letter-spacing: 1px;
-	font-weight: 600;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.8rem;
+    width: fit-content;
+    background-color: #1a1a1a;
+    color: white;
+    margin: 2rem 0;
+    padding: 1.4rem 4rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
 input[type="submit"]:hover {
-	background-color: rgb(53, 52, 52);
+    background-color: rgb(60, 60, 60);
+}
+
+/* ================= RESPONSIVE POST LAYOUT ================= */
+@media (max-width: 768px) {
+    nav { 
+        padding: 0 1.5rem; 
+    }
+    
+    .logo-name-div h1 { 
+        font-size: 2.2rem; 
+    }
+
+    .container {
+        margin-top: 2rem;
+        padding: 0 1.5rem;
+    }
+
+    .container h2 {
+        font-size: 2.4rem;
+    }
+
+    input[type="text"] {
+        font-size: 2.4rem;
+    }
+
+    textarea[name="description"] {
+        font-size: 1.6rem;
+    }
+
+    .ck-editor__editable {
+        min-height: 25rem !important;
+        font-size: 1.6rem !important;
+    }
+
+    .upload-image-div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    input[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
 }

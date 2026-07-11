@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Blog Zone</title>
 		<link rel="stylesheet" th:href="@{/style/home-style.css}" />
 		<link rel="icon" type="image/png" th:href="@{/img/logo4.png}" />
@@ -49,7 +50,7 @@
 						</button>
 					</form>
 				</div>
-				<hr class="below-following-search below-following-search1" />
+				<!-- <hr class="below-following-search below-following-search1" /> -->
 				<p class="no-post">No Post Available...</p>
 				<div class="add-posts">
 					<div class="Ok" th:replace=~{fragments/home-posts::homePosts}></div>

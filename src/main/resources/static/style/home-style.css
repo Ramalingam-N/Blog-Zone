@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
 * {
-	margin: 0;
-	box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-	font-size: 10px;
+    font-size: 10px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -13,13 +17,17 @@ body {
 }
 
 nav {
-	display: flex;
-	align-items: center;
-	width: 100vw;
-	height: 7rem;
-	box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
-	justify-content: space-between;
-	padding: 0 6rem;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 7rem;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    padding: 0 6rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1000;
 }
 
 .logo-name-div {
@@ -104,9 +112,16 @@ nav {
 }
 
 .following-search-div {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 7rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    padding: 1.5rem 0;
+	box-shadow: 0px 2px 0px rgb(214, 214, 214);
 }
 
 .search-form {
@@ -134,7 +149,7 @@ nav {
 }
 
 input[type="search"]:-webkit-autofill {
-	-webkit-box-shadow: 0 0 0px 1000px rgb(246, 246, 246) inset; /* Fills the background */
+	-webkit-box-shadow: 0 0 0px 1000px rgb(246, 246, 246) inset;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -149,34 +164,8 @@ input[type="search"]::-webkit-search-cancel-button {
 	cursor: pointer;
 }
 
-.below-following-search {
-	margin: 0.6rem 0 3rem 0;
-	border: none;
-	height: 1px;
-	position: relative;
-	background-color: rgb(158, 157, 157);
-	filter: contrast(300%);
-	width: 68%;
-}
-
-.below-following-search1::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	width: 6.2rem;
-	height: 100%;
-	background-color: black;
-	transition: 0.8s;
-}
-
-.below-following-search2::before {
-	content: "";
-	position: absolute;
-	left: 8.4rem;
-	width: 7.4rem;
-	height: 100%;
-	background-color: black;
-	transition: 0.8s;
+.add-posts{
+	margin-top: 2.2rem;
 }
 
 .saved-post {
@@ -185,10 +174,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .my-post {
 	color: black !important;
-}
-
-.below-following-search3::before {
-	width: 9.2rem;
 }
 
 .below-following-search4::before {
@@ -219,6 +204,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	display: flex;
 	align-items: center;
 	gap: 4rem;
+	margin-top: 3rem;
 	/* flex-wrap: wrap; */
 }
 
@@ -385,4 +371,86 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .Ok {
 	transition: 1s;
+}
+
+@media (max-width: 768px) {
+    .all-post-div {
+        width: 100%;
+        padding: 0 1.5rem;
+    }
+
+    nav { padding: 0 1.5rem; }
+    .logo-name-div h1 { font-size: 2.2rem; }
+    
+    .following-search-div { 
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 1.5rem; 
+        top: 7rem;
+		box-shadow: 0px 2px 0px rgb(214, 214, 214);
+    }
+    
+    .following-div {
+        gap: 1.5rem;
+    }
+    
+    .following-div span {
+        white-space: nowrap;
+    }
+    
+    .search-form { width: 100%; }
+    .search-form input { width: 100%; }
+    
+    .post-full-details, .profile-post-div { 
+        display: flex;
+        flex-direction: column;
+        width: 100%; 
+        align-items: flex-start;
+    }
+    
+    .post-info-div, .post-info-div1 {
+        display: contents;
+    }
+    
+    .profile-name-div { 
+        order: 1; 
+        margin-bottom: 1rem; 
+        width: 100%; 
+        justify-content: flex-start; 
+    }
+    
+    .post-heading { 
+        order: 2; 
+        margin-bottom: 1rem; 
+        width: 100%; 
+        max-width: 100%; 
+        font-size: 2.2rem;
+        word-wrap: break-word; 
+    }
+    
+    .post-description { 
+        order: 3; 
+        margin-bottom: 1.5rem; 
+        width: 100%; 
+        max-width: 100%; 
+        word-wrap: break-word; 
+    }
+    
+    .post-img-div, 
+    .post-img-div1 { 
+        order: 4; 
+        width: 100%; 
+        max-width: 100%; 
+        margin-bottom: 1.5rem; 
+    }
+    
+    .post-actions-div { order: 5; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;}
+    
+    .post-img-div1 img, .post-img-div img { 
+        width: 100%; 
+        max-width: 100%;
+        height: auto; 
+        border-radius: 8px;
+        object-fit: cover;
+    }
 }
