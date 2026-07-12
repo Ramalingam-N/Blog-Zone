@@ -1,17 +1,18 @@
 package com.blog.service;
 
 import com.blog.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DatabaseKeepAliveService {
 
-    @Autowired
     private PostRepository postRepository;
 
-    // Runs every 15 minutes (900,000 milliseconds)
+    public DatabaseKeepAliveService(PostRepository postRepository){
+        this.postRepository = postRepository;
+    }
+
     @Scheduled(fixedRate = 900000)
     public void pingDatabase() {
         try {
