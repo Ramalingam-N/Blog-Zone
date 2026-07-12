@@ -2,6 +2,21 @@
 
 **Blog-Zone** is a feature-rich full-stack blog platform that allows users to create, read, update, and delete blog posts. The platform supports real-time updates, secure authentication, and interactive features to enhance the user experience. Built with a focus on clean architecture and a fully responsive, premium UI, it offers functionalities like post liking, commenting, saving, and search filtering. Users can also follow other bloggers for personalized content recommendations.
 
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/postpage.png" width="48%" alt="PushNPull">
+  &nbsp;
+  <img src="screenshots/login.png" width="48%" alt="PushNPull">
+</p>
+<p align="center">
+  <img src="screenshots/homepage.png" width="97%" alt="PushNPull">
+</p>
+
+---
+
 ## ✨ Features
 
 - **📱 Fully Responsive UI**: A premium, fluid design that scales flawlessly across desktop, tablet, and mobile devices.
